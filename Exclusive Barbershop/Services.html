@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services - Exclusive Barbershop</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Reset & Fonts */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            padding-top: 70px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(26, 26, 26, 0.85);
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid rgba(244, 180, 0, 0.2);
+        }
+
+        header .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f4b400;
+            text-align: center;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+        }
+
+        nav {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 1rem;
+        }
+
+        nav a:hover {
+            color: #f4b400;
+            background: rgba(244, 180, 0, 0.1);
+        }
+
+        /* Hero Section */
+        #hero {
+            position: relative;
+            height: 60vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .slider {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            height: 85%;
+            z-index: 1;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0;
+            transition: all 1.2s ease-in-out;
+            transform: scale(1.1);
+            filter: brightness(0.9);
+            border-radius: 25px;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: scale(1);
+            animation: kenBurns 8s ease-in-out infinite;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+
+        .hero-content h2 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Services Section */
+        #services {
+            padding: 80px 20px;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin: 50px 0 30px;
+            position: relative;
+            color: #1a1a1a;
+        }
+
+        .section-title::after {
+            content: '';
+            width: 80px;
+            height: 4px;
+            background-color: #f4b400;
+            display: block;
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .service-card-content {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+
+        .service-card .price {
+            font-size: 1.5rem;
+            color: #f4b400;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .service-card .description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .service-card .duration {
+            color: #888;
+            font-size: 0.9rem;
+            font-style: italic;
+        }
+
+        .service-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #f4b400;
+            color: #1a1a1a;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        /* Service Categories */
+        .service-categories {
+            text-align: center;
+            margin: 50px 0 30px;
+        }
+
+        .category-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .category-btn {
+            padding: 12px 25px;
+            background: #fff;
+            border: 2px solid #f4b400;
+            color: #1a1a1a;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .category-btn.active,
+        .category-btn:hover {
+            background: #f4b400;
+            color: #1a1a1a;
+            transform: translateY(-2px);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+            color: white;
+            padding: 80px 40px;
+            text-align: center;
+            border-radius: 20px;
+            margin: 60px auto;
+            max-width: 1200px;
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            background-color: #f4b400;
+            border: none;
+            color: #1a1a1a;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-radius: 5px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #e09c00;
+            transform: scale(1.05);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(20px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes kenBurns {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .fade-in { opacity: 0; animation: fadeIn 1s forwards; }
+        .delay-1 { animation-delay: 0.5s; }
+        .delay-2 { animation-delay: 1s; }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            body {
+                padding-top: 60px;
+            }
+
+            .hero-content h2 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1.2rem;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                gap: 20px;
+            }
+
+            .service-card-content {
+                padding: 20px;
+            }
+
+            .category-buttons {
+                gap: 10px;
+            }
+
+            .category-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .cta-section {
+                padding: 60px 20px;
+                margin: 40px 20px;
+            }
+
+            .cta-section h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            nav {
+                gap: 10px;
+            }
+
+            nav a {
+                padding: 4px 8px;
+                font-size: 0.9rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+        <div class="container">
+            <h1 class="logo">Exclusive Barbershop</h1>
+            <nav>
+                <a href="Home.html">Home</a>
+                <a href="Services.html">Services</a>
+                <a href="About.html">About</a>
+                <a href="Contact.html">Contact</a>
+                <a href="Images.html">gallery</a>
+            </nav>
+        </div>
+    </header>
+
+
+    <section id="hero">
+        <div class="slider">
+            <img src="Images/HomeImage1.jpg" class="slide active" alt="Barber shop interior">
+            <img src="Images/2024-11-20.jpg" class="slide" alt="Haircut service">
+            <img src="Images/Taiper.jpg" class="slide" alt="Beard trim service">
+        </div>
+        <div class="hero-content">
+            <h2 class="fade-in">Premium Barber Services</h2>
+            <p class="fade-in delay-1">Experience the art of traditional grooming with modern excellence</p>
+        </div>
+    </section>
+
+    <section id="services">
+        <h2 class="section-title">Our Services</h2>
+        
+        <div class="service-categories">
+            <div class="category-buttons">
+                <button class="category-btn active" data-category="all">All Services</button>
+                <button class="category-btn" data-category="hair">Hair Services</button>
+                <button class="category-btn" data-category="beard">Beard Services</button>
+                <button class="category-btn" data-category="premium">Premium Services</button>
+            </div>
+        </div>
+
+        <div class="services-grid">
+            <!-- Basic Services -->
+            <div class="service-card" data-category="hair">
+                <div class="service-badge">Popular</div>
+                <img src="images/haircut.jpg" alt="Classic Haircut">
+                <div class="service-card-content">
+                    <h3>Classic Haircut</h3>
+                    <div class="price">R150</div>
+                    <p class="description">Professional haircut with clipper and scissor work, including styling and finish.</p>
+                    <p class="duration">Duration: 30-45 mins</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="beard">
+                <img src="Images/2024-11-20.jpg" alt="Beard Trim & Shape">
+                <div class="service-card-content">
+                    <h3>Beard Trim & Shape</h3>
+                    <div class="price">R80</div>
+                    <p class="description">Precise beard trimming and shaping to maintain your desired look.</p>
+                    <p class="duration">Duration: 20-30 mins</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="hair beard">
+                <div class="service-badge">Best Value</div>
+                <img src="Images/Taiper.jpg" alt="Hair & Beard Combo">
+                <div class="service-card-content">
+                    <h3>Hair & Beard Combo</h3>
+                    <div class="price">R200</div>
+                    <p class="description">Complete grooming package including haircut and beard trim.</p>
+                    <p class="duration">Duration: 45-60 mins</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="beard">
+                <img src="Images/Shaving.jpg" alt="Traditional Shave">
+                <div class="service-card-content">
+                    <h3>Traditional Shave</h3>
+                    <div class="price">R120</div>
+                    <p class="description">Traditional straight razor shave with hot towels and premium products.</p>
+                    <p class="duration">Duration: 30 mins</p>
+                </div>
+            </div>
+
+            <!-- Additional Services -->
+            <div class="service-card" data-category="hair">
+                <img src="Images/Service1.jpg" alt="Kids Haircut">
+                <div class="service-card-content">
+                    <h3>Kids Haircut (Under 12)</h3>
+                    <div class="price">R100</div>
+                    <p class="description">Specialized haircut service for children in a comfortable environment.</p>
+                    <p class="duration">Duration: 25-35 mins</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="premium">
+                <div class="service-badge">Premium</div>
+                <img src="Images/Service2.jpg" alt="Executive Package">
+                <div class="service-card-content">
+                    <h3>Executive Package</h3>
+                    <div class="price">R350</div>
+                    <p class="description">Haircut, beard trim, hot towel treatment, and scalp massage.</p>
+                    <p class="duration">Duration: 75 mins</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="hair">
+                <img src="Images/Service3.jpg" alt="Hair Wash & Style">
+                <div class="service-card-content">
+                    <h3>Hair Wash & Style</h3>
+                    <div class="price">R60</div>
+                    <p class="description">Refreshing hair wash with professional styling and product application.</p>
+                    <p class="duration">Duration: 20 mins</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="premium">
+                <img src="Images/Service4.jpg" alt="Beard Coloring">
+                <div class="service-card-content">
+                    <h3>Beard Coloring</h3>
+                    <div class="price">R150</div>
+                    <p class="description">Professional beard coloring to cover gray or enhance your natural color.</p>
+                    <p class="duration">Duration: 45 mins</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="premium">
+                <img src="Images/Service5.jpg" alt="Scalp Treatment">
+                <div class="service-card-content">
+                    <h3>Scalp Treatment</h3>
+                    <div class="price">R180</div>
+                    <p class="description">Therapeutic scalp treatment for dandruff, dryness, or relaxation.</p>
+                    <p class="duration">Duration: 40 mins</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="hair">
+                <img src="Images/Service6.jpg" alt="Line Up & Edge">
+                <div class="service-card-content">
+                    <h3>Line Up & Edge</h3>
+                    <div class="price">R50</div>
+                    <p class="description">Crisp line up and edge work to sharpen your haircut.</p>
+                    <p class="duration">Duration: 15 mins</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="premium">
+                <div class="service-badge">Luxury</div>
+                <img src="Images/Service7.jpg" alt="Royal Treatment">
+                <div class="service-card-content">
+                    <h3>Royal Treatment</h3>
+                    <div class="price">R500</div>
+                    <p class="description">Ultimate grooming experience with all services plus facial massage.</p>
+                    <p class="duration">Duration: 120 mins</p>
+                </div>
+            </div>
+
+            <div class="service-card" data-category="beard">
+                <img src="Images/Service8.jpg" alt="Beard Treatment">
+                <div class="service-card-content">
+                    <h3>Beard Treatment</h3>
+                    <div class="price">R100</div>
+                    <p class="description">Deep conditioning and treatment for soft, manageable beard.</p>
+                    <p class="duration">Duration: 25 mins</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cta-section">
+            <h2>Ready for Your Transformation?</h2>
+            <p>Book your appointment today and experience the Exclusive Barbershop difference</p>
+            <a href="Contact.html" class="btn">Book Appointment Now</a>
+        </div>
+    </section>
+
+    <script>
+        // Image Slider
+        const slides = document.querySelectorAll(".slide");
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach((slide, i) => slide.classList.remove("active"));
+            slides[index].classList.add("active");
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            if(currentSlide >= slides.length) currentSlide = 0;
+            showSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 4000);
+
+        // Service Category Filter
+        const categoryButtons = document.querySelectorAll('.category-btn');
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        categoryButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                categoryButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const category = button.getAttribute('data-category');
+                
+                // Filter service cards
+                serviceCards.forEach(card => {
+                    if (category === 'all' || card.getAttribute('data-category').includes(category)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
